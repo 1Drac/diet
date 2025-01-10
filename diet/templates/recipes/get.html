@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}recipe{% endblock %}
+
+{% block content %}
+<table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Recipe name</th>
+                <th>Description</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recipe in recipes %}
+            <tr>
+                <td>{{ recipe['id'] }}</td>
+                <td>{{ recipe['name'] }}</td>
+                <td>{{ recipe['description'] }}</td> 
+                <td>
+                    <div class="td">
+                        <a href="{{ url_for('recipes.update_recipe', id=recipe['id']) }}" class="table">
+                            <svg width="18" height="18" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+                                <g transform="translate(-760 -452)">
+                                  <path d="M785 523.1C787 525.1 787 528.2 785 530.2L776.5 533 775 531.5 777.8 523C779.9 521.1 783 521.1 785 523.1ZM824.3 470.9 774.3 521 768 540 787.1 533.7 837.1 483.7"/>
+                                  <path d="M846.9 468.2 839.8 461.1C838.2 459.5 835.7 459.5 834.1 461.1L827.1 468.1 839.8 480.8 846.8 473.8C848.5 472.3 848.5 469.8 846.9 468.2Z"/>
+                                </g>
+                            </svg>                          
+                        </a>
+                        <a href="{{ url_for('recipes.delete_recipe', id=recipe['id']) }}" class="table">
+                            <svg width="18" height="18" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+                                <g transform="translate(-992 -452)">
+                                  <path d="M1075.4 473.1 1066.9 464.6 1040 491.5 1013.1 464.6 1004.6 473.1 1031.5 500 1004.6 526.9 1013.1 535.4 1040 508.5 1066.9 535.4 1075.4 526.9 1048.5 500Z"/>
+                                </g>
+                            </svg>  
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>    
+
+{% endblock %}

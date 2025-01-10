@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Ingredient{% endblock %}
+{% block script %}
+    <script>
+        setTimeout(() => {
+            const flashMessages = document.getElementById('error-messages');
+            if (flashMessages) {
+                flashMessages.remove();
+            }
+        }, 4000); // 5 seconds
+    </script>
+{% endblock %}
+
+
+{% block content %}
+{% with messages = form.errors %}
+    {% if messages %}
+        <div id="error-messages" class="error-messages">
+            {% for error in form.errors %}
+                <div class="error">{{ form.errors[error][0]}}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+    <form method="POST">
+            <div class="form-input">
+                <label for="name">Ingredient Name</label>
+                <input type="text" name="name" id="name" value="{{ ingredient['name']}}">
+            </div>
+            <div class="form-input">
+                <label for="carbohydrate">Carbohydrates</label>
+                <input type="number" step="0.01" name="carbohydrate" id="carbohydrate" value="{{ ingredient['carbohydrate']}}">
+            </div>
+            <div class="form-input">
+                <label for="protein">Protein</label>
+                <input type="number" step="0.01" name="protein" id="protein" value="{{ ingredient['protein']}}">
+            </div>
+            <div class="form-input">
+                <label for="fat">Fat</label>
+                <input type="number" step="0.01" name="fat" id="fat" value="{{ ingredient['fat']}}">
+            </div>
+            <div class="form-input">
+                <label for="portion">Portion</label>
+                <input type="number" step="0.01" name="portion" id="portion" value="{{ ingredient['portion']}}">
+            </div>
+
+            <input type="submit" name="submit" id="submit">
+            <input type="reset" name="reset" id="reset">
+
+    </form>
+{% endblock %}

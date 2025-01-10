@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        setTimeout(() => {
+            const flashMessages = document.getElementById('flash-messages');
+            if (flashMessages) {
+                flashMessages.remove();
+            }
+        }, 3000); // 5 seconds
+    </script>
+
+    {% block script %}{% endblock %}
+    
+</head>
+<body>
+    <div class="nav">
+        <a href="{{ url_for('ingredients.post_ingredient') }}" class="link">Add Ingredient</a>
+        <a href="{{ url_for('ingredients.get_ingredients') }}" class="link">Ingredients</a>
+        <a href="{{ url_for('recipes.post_recipe') }}" class="link">Add Recipe</a>
+        <a href="{{ url_for('recipes.get_recipes') }}" class="link">Recipes</a>
+    </div>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div id="flash-messages">
+                {% for message in messages %}
+                    <div class="success">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>

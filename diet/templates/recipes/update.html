@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Ingredient{% endblock %}
+{% block script %}
+    <script>
+        setTimeout(() => {
+            const flashMessages = document.getElementById('error-messages');
+            if (flashMessages) {
+                flashMessages.remove();
+            }
+        }, 4000); // 5 seconds
+    </script>
+{% endblock %}
+
+{% block content %}
+{% with messages = form.errors %}
+    {% if messages %}
+        <div id="error-messages" class="error-messages">
+            {% for error in form.errors %}
+                <div class="error">{{ form.errors[error][0]}}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+    <form method="POST">
+        <div class="form-input">
+            <label for="name">Recipe Name</label>
+            <input type="text" name="name" id="name" value="{{ recipe['name']}}">
+        </div>
+        <div class="form-input">
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description" value="{{ recipe['description']}}">
+        </div>
+        <input type="submit" name="submit" id="submit">
+        <input type="reset" name="reset" id="reset">
+    </form>
+{% endblock %}
